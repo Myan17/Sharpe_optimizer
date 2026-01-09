@@ -186,6 +186,7 @@ Sharpe ratio:
 $$
 \text{Sharpe}(w) = \frac{\mu_p - r_f}{\sigma_p}
 $$
+
 ---
 
 ### 4️⃣ Numerical Optimization with SciPy
