@@ -34,15 +34,15 @@ the script:
 
 The optimization problem solved is:
 
-\[
+$$
 \max_w \quad \frac{w^\top \mu - r_f}{\sqrt{w^\top \Sigma w}}
-\]
+$$
 
 Subject to:
 
-\[
+$$
 \sum_i w_i = 1, \quad w_i \ge 0 \; \forall i
-\]
+$$
 
 This ensures the portfolio is:
 - Fully invested
@@ -127,16 +127,15 @@ In real-world portfolio management, practitioners often impose:
 These constraints are **intentionally excluded** here to demonstrate the *pure* max-Sharpe solution.
 
 ---
-
 ## 🧠 Key Concepts Learned
 
 ### 1️⃣ Estimating Expected Returns
 
-From daily returns \( r_t \), the mean daily return is annualized as:
+From daily returns $r_t$, the mean daily return is annualized as:
 
-\[
-\mu_{\text{annual}} \approx (1 + \mu_{\text{daily}})^{252} - 1
-\]
+$$
+\mu_{annual} \approx (1 + \mu_{daily})^{252} - 1
+$$
 
 This mirrors how quantitative models convert historical data into expected returns.
 
@@ -144,14 +143,14 @@ This mirrors how quantitative models convert historical data into expected retur
 
 ### 2️⃣ Building the Annualized Covariance Matrix
 
-The daily covariance matrix \( \Sigma_{\text{daily}} \) is annualized as:
+The daily covariance matrix $\Sigma_{daily}$ is annualized as:
 
-\[
-\Sigma_{\text{annual}} \approx \Sigma_{\text{daily}} \times 252
-\]
+$$
+\Sigma_{annual} \approx \Sigma_{daily} \times 252
+$$
 
 This risk model is foundational to:
-- Mean-variance optimization
+- Mean–variance optimization
 - Risk parity portfolios
 - Efficient frontier construction
 - Factor and risk-budgeting frameworks
@@ -161,28 +160,32 @@ This risk model is foundational to:
 ### 3️⃣ Portfolio Statistics
 
 Given:
-- \( w \): weight vector  
-- \( \mu \): expected returns vector  
-- \( \Sigma \): covariance matrix  
-- \( r_f \): risk-free rate  
+- $w$ = weight vector  
+- $\mu$ = vector of annual expected returns  
+- $\Sigma$ = annualized covariance matrix  
+- $r_f$ = risk-free rate  
 
-You compute:
+Portfolio return:
 
-**Portfolio return**
-\[
+$$
 \mu_p = w^\top \mu
-\]
+$$
 
-**Portfolio variance and volatility**
-\[
-\sigma_p^2 = w^\top \Sigma w, \quad \sigma_p = \sqrt{w^\top \Sigma w}
-\]
+Portfolio variance and volatility:
 
-**Sharpe ratio**
-\[
+$$
+\sigma_p^2 = w^\top \Sigma w
+$$
+
+$$
+\sigma_p = \sqrt{w^\top \Sigma w}
+$$
+
+Sharpe ratio:
+
+$$
 \text{Sharpe}(w) = \frac{\mu_p - r_f}{\sigma_p}
-\]
-
+$$
 ---
 
 ### 4️⃣ Numerical Optimization with SciPy
