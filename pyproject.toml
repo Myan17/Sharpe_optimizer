@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sharpe-optimizer"
+version = "0.1.0"
+description = "Long-only maximum Sharpe ratio portfolio optimizer"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "pandas",
+  "numpy",
+  "matplotlib",
+  "yfinance",
+  "scipy"
+]
+
+[project.scripts]
+sharpe-opt = "sharpe_optimizer.cli:main"
