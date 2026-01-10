@@ -23,6 +23,7 @@ from __future__ import annotations
 import sys
 from typing import List, Tuple
 
+import os
 import numpy as np
 import pandas as pd
 import yfinance as yf
@@ -219,15 +220,18 @@ def optimize_sharpe(
 # =========================
 
 def plot_weights(tickers: List[str], weights: np.ndarray) -> None:
-    """
-    Plot a bar chart of portfolio weights.
-    """
     fig, ax = plt.subplots(figsize=(8, 5))
     ax.bar(tickers, weights)
     ax.set_title("Optimal Portfolio Weights (Max Sharpe, Long-Only)")
     ax.set_ylabel("Weight")
     plt.tight_layout()
-    plt.show()
+
+    # If running headless (e.g., Docker), save plot instead of showing
+    if os.environ.get("HEADLESS", "0") == "1":
+        plt.savefig("weights.png", dpi=200, bbox_inches="tight")
+        print("Saved plot to weights.png")
+    else:
+        plt.show()
 
 
 # =========================
