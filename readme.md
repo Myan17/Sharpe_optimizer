@@ -205,53 +205,134 @@ using:
 
 ---
 
-## 🛠 How to Run the Project
+---
 
-From the `sharpe_optimizer` directory:
+## 🛠 How to Run the Project (Beginner → Advanced)
 
-### 1️⃣ Install dependencies
-```bash
-pip install -r requirements.txt
-```
+This project supports **three ways to run**, depending on your comfort level:
 
-**requirements.txt**
-```
-pandas
-numpy
-matplotlib
-yfinance
-scipy
-```
-
-### 2️⃣ Run the script
-```bash
-python3 sharpe_optimizer.py
-```
-
-### 3️⃣ Provide inputs when prompted
-```text
-Enter tickers (space-separated, e.g. META NVDA SPY): META NVDA SPY
-Enter START date (YYYY-MM-DD): 2020-01-01
-Enter END date (YYYY-MM-DD): 2024-01-01
-Enter annual risk-free rate in %, e.g. 4 for 4% [0]: 4
-```
-
-You will see:
-- Estimated annual returns
-- Annualized covariance matrix
-- Optimal portfolio weights
-- Portfolio performance metrics
-- A bar chart of portfolio weights
+- **Level 1 (Beginner):** run locally with Python + a virtual environment  
+- **Level 2 (Recommended):** install once as a CLI command using `pipx`  
+- **Level 3 (Most portable):** run in Docker (no Python required)
 
 ---
 
-## 📁 Project Structure
+## 🟢 Level 1 — Run Locally (Beginner-Friendly)
+
+### Step 0: Prerequisites
+- Python 3.9+ installed
+- `pip` available
+
+### Step 1: Clone the repository
+Run these commands in your terminal:
+
+    git clone https://github.com/Myan17/Sharpe_optimizer.git
+    cd Sharpe_optimizer
+
+### Step 2: Create and activate a virtual environment (recommended)
+macOS / Linux:
+
+    python3 -m venv .venv
+    source .venv/bin/activate
+
+Windows (PowerShell):
+
+    python -m venv .venv
+    .\.venv\Scripts\Activate.ps1
+
+You should now see `(.venv)` in your terminal.
+
+### Step 3: Install dependencies
+
+    pip install -r requirements.txt
+
+### Step 4: Run the optimizer
+
+    python3 sharpe_optimizer.py
+
+Follow the prompts to enter tickers, dates, and the risk-free rate.
+
+---
+
+## 🟡 Level 2 — Install as a Global CLI Tool (Recommended)
+
+This installs the optimizer as a **system command**, so you can run it from anywhere.
+
+### Step 1: Install pipx (one-time)
+macOS:
+
+    brew install pipx
+    pipx ensurepath
+
+Restart your terminal after `pipx ensurepath`.
+
+### Step 2: Install the Sharpe Optimizer CLI from GitHub
+
+    pipx install git+https://github.com/Myan17/Sharpe_optimizer.git
+
+### Step 3: Run the CLI
+
+    sharpe-opt
+
+### Step 4: Headless mode (no GUI window)
+If you are on a server or want to save the plot instead of opening a window:
+
+    HEADLESS=1 sharpe-opt
+
+This will save the weights bar chart as `weights.png`.
+
+Upgrade / uninstall:
+
+    pipx upgrade sharpe-optimizer
+    pipx uninstall sharpe-optimizer
+
+---
+
+## 🔴 Level 3 — Run with Docker (No Python Required)
+
+Docker runs the app in an isolated environment, so it behaves the same on any machine.
+
+### Step 0: Prerequisite
+- Install Docker Desktop and make sure Docker is running
+
+### Step 1: Build the Docker image (from the repo root)
+
+    docker build -t sharpe-optimizer .
+
+### Step 2: Run the optimizer (interactive prompts)
+
+    docker run -it sharpe-optimizer
+
+### Step 3: Headless mode + export the plot
+Run with headless plotting enabled:
+
+    docker run --name so -it -e HEADLESS=1 sharpe-optimizer
+
+Copy the generated plot to your computer:
+
+    docker cp so:/app/weights.png .
+    docker rm so
+
+You will now have `weights.png` in your current directory.
+
+
+---
+
+## 📁 Project Structure 
 
 ```text
 sharpe_optimizer/
-├── sharpe_optimizer.py   # Data loading, optimization, and plotting
-├── requirements.txt      # Python dependencies
-└── README.md             # Project documentation
+├── sharpe_optimizer/        # Python package
+│   ├── __init__.py          # Package initializer
+│   └── cli.py               # CLI entry point (sharpe-opt command)
+│
+├── pyproject.toml           # Package metadata & dependencies
+├── requirements.txt         # Dependency list (for local installs)
+├── Dockerfile               # Docker image definition (Level 4)
+├── .dockerignore            # Excludes unnecessary files from Docker builds
+├── .gitignore               # Ignores virtualenvs, caches, artifacts
+├── README.md                # Project documentation
+└── .venv/                   # Local virtual environment (not committed)
 ```
 
 ---
