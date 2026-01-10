@@ -20,3 +20,14 @@ dist/
 # Caches
 .pytest_cache/
 .mypy_cache/
+
+# Generated outputs
+weights.png
+*.png
+
+# Jupyter / notebooks (if you ever add them)
+.ipynb_checkpoints/
+
+# Local env/config
+.env
+
