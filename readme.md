@@ -1,3 +1,9 @@
+> **Archived — this project now lives in [quant-toolkit](https://github.com/Myan17/quant-toolkit).**
+> Its code and full commit history are preserved there under
+> [`legacy/Sharpe_optimizer`](https://github.com/Myan17/quant-toolkit/tree/main/legacy/Sharpe_optimizer).
+> The rebuilt library adds tests, a walk-forward backtest, and fixes to the
+> Sortino calculation and to weight/ticker alignment.
+
 # Sharpe Ratio Optimizer (Long-Only)
 
 This project builds a **maximum Sharpe ratio portfolio** using historical market data, estimated returns, and risk metrics.
